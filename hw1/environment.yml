@@ -1,0 +1,6 @@
+name: cs197-hw1
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+prefix: /Users/sunjungyum/miniconda/envs/cs197-hw1

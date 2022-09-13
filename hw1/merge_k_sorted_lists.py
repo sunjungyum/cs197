@@ -21,25 +21,26 @@ def mergeKLists(lists):
     cur = output_start
 
     # iterate through lists, pushing k heads onto the min heap
-    for head in lists:
+    for i, head in enumerate(lists):
         if head:
-            h.heappush(min_heap, head.val)
+            h.heappush(min_heap, (head.val, i))
 
     # while min heap has elements
     while min_heap:
     #   pop the minimum and add it to the output linked list
-        temp = h.heappop(min_heap)
-        cur.next = temp
+        _, temp_i = h.heappop(min_heap)
+        cur.next = lists[temp_i]
 
     #   iterate the runner
         cur = cur.next
 
     #   push the popped element's 'next' onto the min heap (if not None)
-        if temp.next:
-            h.heappush(min_heap, temp.next)
+        if lists[temp_i].next:
+            lists[temp_i] = lists[temp_i].next
+            h.heappush(min_heap, (lists[temp_i].val, temp_i))
 
     # return the 'next of the 'start' node
-    return output_start
+    return output_start.next
 
 def make_linked_lists(klists):
     lists = [0] * len(klists)
@@ -65,12 +66,11 @@ def print_linked_list(head):
     print(output_string)
 
 def test():
-    n1 = ListNode(val=1, next=ListNode(val=2, next=None))
-    print_linked_list(n1)
-
-    n2 = make_linked_lists([[1,4,5],[1,3,4],[2,6]])
-    for linked_list in n2:
+    test_klists = make_linked_lists([[1,4,5],[1,3,4],[2,6]])
+    for linked_list in test_klists:
         print_linked_list(linked_list)
+    test_merged_head = mergeKLists(test_klists)
+    print_linked_list(test_merged_head)
 
 if __name__ == "__main__":
     test()

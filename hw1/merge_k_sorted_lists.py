@@ -1,17 +1,28 @@
+"""
+Solving Leetcode Problem.
+https://leetcode.com/problems/merge-k-sorted-lists/
+
+You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+
+Merge all the linked-lists into one sorted linked-list and return it.
+"""
 import heapq as h
 
 
-# Definition for singly-linked list.
 class ListNode(object):
+    """
+    ListNode class type for linked-list implementation.
+
+    'val' attribute gives integer value, and 'next' attribute gives the next ListNode
+    """
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
 
-def mergeKLists(lists):
+def merge_k_lists(lists):
     """
-    :type lists: List[ListNode]
-    :rtype: ListNode
+    Returns a sorted linked-list given a list of sorted linked-lists.
     """
     min_heap = []
     h.heapify(min_heap)
@@ -36,6 +47,9 @@ def mergeKLists(lists):
 
 
 def make_linked_lists(klists):
+    '''
+    Returns a list of linked-lists given a list of lists.
+    '''
     lists = [0] * len(klists)
 
     for i, klist in enumerate(klists):
@@ -49,6 +63,9 @@ def make_linked_lists(klists):
 
 
 def output_linked_list(head):
+    '''
+    Returns a formatted string of linked-list elements given the head of linked-list.
+    '''
     output_string = ""
 
     cur = head
@@ -60,8 +77,10 @@ def output_linked_list(head):
     return output_string
 
 
-# Test 1: k = 3
 def test_1():
+    '''
+    Runs test 1, which uses k = 3 with all positive integers.
+    '''
     print("Test 1:")
     test_klists = make_linked_lists([[1, 4, 5], [1, 3, 4], [2, 6]])
     print("Input: ", end="")
@@ -70,7 +89,7 @@ def test_1():
         test_input_string += "[" + output_linked_list(linked_list) + "] "
     print(test_input_string)
 
-    test_merged_head = mergeKLists(test_klists)
+    test_merged_head = merge_k_lists(test_klists)
     print("Output: [", end="")
     test_output_string = output_linked_list(test_merged_head)
     print(test_output_string + "]")
@@ -79,8 +98,10 @@ def test_1():
     print("SUCCESS\n" if test_output_string == answer_string else "FAILURE\n")
 
 
-# Test 2: k = 5
 def test_2():
+    '''
+    Runs test 2, which uses k = 5 with negative and positive integers, as well as 0.
+    '''
     print("Test 2:")
     test_klists = make_linked_lists([
                                         [-1, 4, 5, 9, 11, 12, 30],
@@ -95,7 +116,7 @@ def test_2():
         test_input_string += "[" + output_linked_list(linked_list) + "] "
     print(test_input_string)
 
-    test_merged_head = mergeKLists(test_klists)
+    test_merged_head = merge_k_lists(test_klists)
     print("Output: [", end="")
     test_output_string = output_linked_list(test_merged_head)
     print(test_output_string + "]")
@@ -105,8 +126,10 @@ def test_2():
     print("SUCCESS\n" if test_output_string == answer_string else "FAILURE\n")
 
 
-# Test 3: k = 4 (empty lists)
 def test_3():
+    '''
+    Runs test 3, an edge case which uses k = 4 with empty lists.
+    '''
     print("Test 3:")
     test_klists = make_linked_lists([[], [], [], []])
     print("Input: ", end="")
@@ -115,7 +138,7 @@ def test_3():
         test_input_string += "[" + output_linked_list(linked_list) + "] "
     print(test_input_string)
 
-    test_merged_head = mergeKLists(test_klists)
+    test_merged_head = merge_k_lists(test_klists)
     print("Output: [", end="")
     test_output_string = output_linked_list(test_merged_head)
     print(test_output_string + "]")
@@ -124,8 +147,10 @@ def test_3():
     print("SUCCESS\n" if test_output_string == answer_string else "FAILURE\n")
 
 
-# Test 4: k = 0
 def test_4():
+    '''
+    Runs test 4, an edge case which uses k = 0.
+    '''
     print("Test 4:")
     test_klists = make_linked_lists([])
     print("Input: ", end="")
@@ -134,7 +159,7 @@ def test_4():
         test_input_string += "[" + output_linked_list(linked_list) + "] "
     print(test_input_string)
 
-    test_merged_head = mergeKLists(test_klists)
+    test_merged_head = merge_k_lists(test_klists)
     print("Output: [", end="")
     test_output_string = output_linked_list(test_merged_head)
     print(test_output_string + "]")

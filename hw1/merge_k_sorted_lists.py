@@ -40,3 +40,37 @@ def mergeKLists(lists):
 
     # return the 'next of the 'start' node
     return output_start
+
+def make_linked_lists(klists):
+    lists = [0] * len(klists)
+
+    for i, klist in enumerate(klists):
+        start = ListNode(val=-1)
+        cur = start
+        for value in klist:
+            cur.next = ListNode(val=value)
+            cur = cur.next
+        lists[i] = start.next
+    return lists
+
+def print_linked_list(head):
+    output_string = ""
+
+    cur = head
+    while cur:
+        output_string += str(cur.val)
+        if cur.next:
+            output_string += " -> "
+        cur = cur.next
+    print(output_string)
+
+def test():
+    n1 = ListNode(val=1, next=ListNode(val=2, next=None))
+    print_linked_list(n1)
+
+    n2 = make_linked_lists([[1,4,5],[1,3,4],[2,6]])
+    for linked_list in n2:
+        print_linked_list(linked_list)
+
+if __name__ == "__main__":
+    test()

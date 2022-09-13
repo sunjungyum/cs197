@@ -54,7 +54,7 @@ def make_linked_lists(klists):
         lists[i] = start.next
     return lists
 
-def print_linked_list(head):
+def output_linked_list(head):
     output_string = ""
 
     cur = head
@@ -63,14 +63,82 @@ def print_linked_list(head):
         if cur.next:
             output_string += " -> "
         cur = cur.next
-    print(output_string)
+    return output_string
 
-def test():
+# Test 1: k = 3
+def test_1():
+    print("Test 1:")
     test_klists = make_linked_lists([[1,4,5],[1,3,4],[2,6]])
+    print("Input: ", end="")
+    test_input_string = ""
     for linked_list in test_klists:
-        print_linked_list(linked_list)
+        test_input_string += "[" + output_linked_list(linked_list) + "] "
+    print(test_input_string)
+
     test_merged_head = mergeKLists(test_klists)
-    print_linked_list(test_merged_head)
+    print("Output: [", end="")
+    test_output_string = output_linked_list(test_merged_head)
+    print(test_output_string + "]")
+
+    answer_string = "1 -> 1 -> 2 -> 3 -> 4 -> 4 -> 5 -> 6"
+    print("SUCCESS\n") if test_output_string == answer_string else print("FAILURE\n")
+
+# Test 2: k = 5
+def test_2():
+    print("Test 2:")
+    test_klists = make_linked_lists([[-1,4,5,9,11,12,30],[0,2,3],[-2,5,6],[1,3],[4,8,11,15,18]])
+    print("Input: ", end="")
+    test_input_string = ""
+    for linked_list in test_klists:
+        test_input_string += "[" + output_linked_list(linked_list) + "] "
+    print(test_input_string)
+
+    test_merged_head = mergeKLists(test_klists)
+    print("Output: [", end="")
+    test_output_string = output_linked_list(test_merged_head)
+    print(test_output_string + "]")
+
+    answer_string = "-2 -> -1 -> 0 -> 1 -> 2 -> 3 -> 3 -> 4 -> 4 -> 5 -> 5 -> 6 -> 8 -> 9 -> 11 -> 11 -> 12 -> 15 -> 18 -> 30"
+    print("SUCCESS\n") if test_output_string == answer_string else print("FAILURE\n")
+
+# Test 3: k = 4 (empty lists)
+def test_3():
+    print("Test 3:")
+    test_klists = make_linked_lists([[], [], [], []])
+    print("Input: ", end="")
+    test_input_string = ""
+    for linked_list in test_klists:
+        test_input_string += "[" + output_linked_list(linked_list) + "] "
+    print(test_input_string)
+
+    test_merged_head = mergeKLists(test_klists)
+    print("Output: [", end="")
+    test_output_string = output_linked_list(test_merged_head)
+    print(test_output_string + "]")
+
+    answer_string = ""
+    print("SUCCESS\n") if test_output_string == answer_string else print("FAILURE\n")
+
+# Test 4: k = 0
+def test_4():
+    print("Test 4:")
+    test_klists = make_linked_lists([])
+    print("Input: ", end="")
+    test_input_string = ""
+    for linked_list in test_klists:
+        test_input_string += "[" + output_linked_list(linked_list) + "] "
+    print(test_input_string)
+
+    test_merged_head = mergeKLists(test_klists)
+    print("Output: [", end="")
+    test_output_string = output_linked_list(test_merged_head)
+    print(test_output_string + "]")
+
+    answer_string = ""
+    print("SUCCESS\n") if test_output_string == answer_string else print("FAILURE\n")
 
 if __name__ == "__main__":
-    test()
+    test_1()
+    test_2()
+    test_3()
+    test_4()

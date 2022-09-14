@@ -10,11 +10,12 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 @app.route("/", methods=("GET", "POST"))
 def index():
     if request.method == "POST":
-        animal = request.form["animal"]
+        ingredient = request.form["ingredient"]
         response = openai.Completion.create(
             model="text-davinci-002",
-            prompt=generate_prompt(animal),
+            prompt=generate_prompt(ingredient),
             temperature=0.6,
+            max_tokens=50,
         )
         return redirect(url_for("index", result=response.choices[0].text))
 
@@ -22,14 +23,22 @@ def index():
     return render_template("index.html", result=result)
 
 
-def generate_prompt(animal):
-    return """Suggest three names for an animal that is a superhero.
+def generate_prompt(ingredient):
+    return """Suggest three dessert recipes that include the ingredient.
 
-Animal: Cat
-Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-Animal: Dog
-Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-Animal: {}
-Names:""".format(
-        animal.capitalize()
+Ingredient: Banana
+Dessert Recipe: Banana and Walnut Bread, Banana Pudding, Roasted Bananas with Vanilla Ice Cream
+
+Ingredient: Pineapple
+Dessert Recipe: Pineapple Upside-Down Cake, Pineapple Carrot Cake, Piña Colada Popsicles
+
+Ingredient: Strawberry
+Dessert Recipe: Strawberry Chocolate Mousse Cake, Strawberry Shortcake, Strawberry Rhubarb Pie
+
+Ingredient: Nutella
+Dessert Recipe: Nutella Hand Pies, Nutella Brownies, Nutella-Filled Strawberries
+
+Ingredient: {}
+Dessert Recipe:""".format(
+        ingredient.capitalize()
     )

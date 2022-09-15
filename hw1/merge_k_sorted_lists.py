@@ -21,13 +21,17 @@ class ListNode(object):
 
 
 def merge_k_lists(lists):
-    #return merge_k_lists_iter(lists)
-    return merge_k_lists_recurs(lists)
+    '''
+    Calls the appropriate merging function (iterative or recursive).
+    '''
+    return merge_k_lists_iter(lists)
+    # Extra Credit:
+    # return merge_k_lists_recurs(lists)
 
 
 def merge_k_lists_iter(lists):
     '''
-    Returns a sorted linked-list given a list of sorted linked-lists.
+    Returns a sorted linked-list given a list of sorted linked-lists using an interative algorithm.
     :type lists: List[ListNode]
     :rtype: ListNode
     '''
@@ -54,6 +58,12 @@ def merge_k_lists_iter(lists):
 
 
 def merge_k_lists_recurs(lists):
+    '''
+    EXTRA-CREDIT
+    Returns a sorted linked-list given a list of sorted linked-lists using a recursive algorithm.
+    :type lists: List[ListNode]
+    :rtype: ListNode
+    '''
     k = len(lists)
     dist = 1
 
@@ -68,6 +78,10 @@ def merge_k_lists_recurs(lists):
     return lists[0]
 
 def merge_adj_lists(list1, list2):
+    '''
+    EXTRA-CREDIT
+    Merges two sorted linked-lists together, comparing element by element.
+    '''
     output_start = ListNode(val=-1)
     cur = output_start
 
@@ -82,7 +96,7 @@ def merge_adj_lists(list1, list2):
 
     if list1:
         cur.next = list1
-    
+
     if list2:
         cur.next = list2
 

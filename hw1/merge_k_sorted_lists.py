@@ -2,7 +2,8 @@
 Solving Leetcode Problem.
 https://leetcode.com/problems/merge-k-sorted-lists/
 
-You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
+You are given an array of k linked-lists lists, each linked-list is
+sorted in ascending order.
 
 Merge all the linked-lists into one sorted linked-list and return it.
 '''
@@ -13,7 +14,8 @@ class ListNode(object):
     '''
     ListNode class type for linked-list implementation.
 
-    'val' attribute gives integer value, and 'next' attribute gives the next ListNode
+    'val' attribute gives integer value, and 'next' attribute gives
+    the next ListNode
     '''
     def __init__(self, val=0, next=None):
         self.val = val
@@ -31,7 +33,8 @@ def merge_k_lists(lists):
 
 def merge_k_lists_iter(lists):
     '''
-    Returns a sorted linked-list given a list of sorted linked-lists using an interative algorithm.
+    Returns a sorted linked-list given a list of sorted linked-lists
+    using an interative algorithm.
     :type lists: List[ListNode]
     :rtype: ListNode
     '''
@@ -60,7 +63,8 @@ def merge_k_lists_iter(lists):
 def merge_k_lists_recurs(lists):
     '''
     EXTRA-CREDIT
-    Returns a sorted linked-list given a list of sorted linked-lists using a recursive algorithm.
+    Returns a sorted linked-list given a list of sorted linked-lists
+    using a recursive algorithm.
     :type lists: List[ListNode]
     :rtype: ListNode
     '''
@@ -76,6 +80,7 @@ def merge_k_lists_recurs(lists):
         dist *= 2
 
     return lists[0]
+
 
 def merge_adj_lists(list1, list2):
     '''
@@ -102,9 +107,12 @@ def merge_adj_lists(list1, list2):
 
     return output_start.next
 
+
 '''
 Testing functions
 '''
+
+
 def make_linked_lists(klists):
     '''
     Returns a list of linked-lists given a list of lists.
@@ -123,7 +131,8 @@ def make_linked_lists(klists):
 
 def output_linked_list(head):
     '''
-    Returns a formatted string of linked-list elements given the head of linked-list.
+    Returns a formatted string of linked-list elements given the head
+    of linked-list.
     '''
     output_string = ""
 
@@ -159,7 +168,8 @@ def test_1():
 
 def test_2():
     '''
-    Runs test 2, which uses k = 5 with negative and positive integers, as well as 0.
+    Runs test 2, which uses k = 5 with negative and positive integers,
+    as well as 0.
     '''
     print("Test 2:")
     test_klists = make_linked_lists([

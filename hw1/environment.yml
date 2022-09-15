@@ -3,4 +3,6 @@ channels:
   - defaults
 dependencies:
   - python=3.9
+  - flake8
+  - pylint
 prefix: /Users/sunjungyum/miniconda/envs/cs197-hw1

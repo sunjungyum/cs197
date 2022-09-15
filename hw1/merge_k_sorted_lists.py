@@ -1,29 +1,36 @@
-"""
+'''
 Solving Leetcode Problem.
 https://leetcode.com/problems/merge-k-sorted-lists/
 
 You are given an array of k linked-lists lists, each linked-list is sorted in ascending order.
 
 Merge all the linked-lists into one sorted linked-list and return it.
-"""
+'''
 import heapq as h
 
 
 class ListNode(object):
-    """
+    '''
     ListNode class type for linked-list implementation.
 
     'val' attribute gives integer value, and 'next' attribute gives the next ListNode
-    """
+    '''
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 
 
 def merge_k_lists(lists):
-    """
+    #return merge_k_lists_iter(lists)
+    return merge_k_lists_recurs(lists)
+
+
+def merge_k_lists_iter(lists):
+    '''
     Returns a sorted linked-list given a list of sorted linked-lists.
-    """
+    :type lists: List[ListNode]
+    :rtype: ListNode
+    '''
     min_heap = []
     h.heapify(min_heap)
 
@@ -46,6 +53,44 @@ def merge_k_lists(lists):
     return output_start.next
 
 
+def merge_k_lists_recurs(lists):
+    k = len(lists)
+    dist = 1
+
+    if k <= 0:
+        return None
+
+    while dist < k:
+        for i in range(0, k - dist, dist * 2):
+            lists[i] = merge_adj_lists(lists[i], lists[i + dist])
+        dist *= 2
+
+    return lists[0]
+
+def merge_adj_lists(list1, list2):
+    output_start = ListNode(val=-1)
+    cur = output_start
+
+    while list1 and list2:
+        if list1.val <= list2.val:
+            cur.next = list1
+            list1 = list1.next
+        else:
+            cur.next = list2
+            list2 = list2.next
+        cur = cur.next
+
+    if list1:
+        cur.next = list1
+    
+    if list2:
+        cur.next = list2
+
+    return output_start.next
+
+'''
+Testing functions
+'''
 def make_linked_lists(klists):
     '''
     Returns a list of linked-lists given a list of lists.
@@ -121,7 +166,7 @@ def test_2():
     test_output_string = output_linked_list(test_merged_head)
     print(test_output_string + "]")
 
-    answer_string = '-2 -> -1 -> 0 -> 1 -> 2 -> 3 -> 3 -> 4 -> 4 -> 5 ->'\
+    answer_string = '-2 -> -1 -> 0 -> 1 -> 2 -> 3 -> 3 -> 4 -> 4 -> 5 -> '\
                     '5 -> 6 -> 8 -> 9 -> 11 -> 11 -> 12 -> 15 -> 18 -> 30'
     print("SUCCESS\n" if test_output_string == answer_string else "FAILURE\n")
 
